@@ -5,25 +5,23 @@ using UnityEngine;
 
 public class UpgradeTower : MonoBehaviour
 {
-    [Header("Each Tower")]
-    [SerializeField] private Tower tower;
 
     [Header("Upgrade Multiplier")]
     [SerializeField, Range(0,10)] private float upgradeMultiplier;
 
+    private Tower tower;
     private TowerStat towerStat;
 
     private void Start()
     {
-        if(tower == null)
-            tower  = GetComponent<Tower>();
+        tower  = GetComponent<Tower>();
     }
 
     public void OnClickUpgradeButton()
     {
         towerStat = tower.UpgradeTower(upgradeMultiplier);
 
-        Debug.Log("Tower upgraded: ");
+        Debug.Log("Tower upgraded! upgradeMultiplier: " + upgradeMultiplier);
         towerStat.ShowStat();
     }
 }

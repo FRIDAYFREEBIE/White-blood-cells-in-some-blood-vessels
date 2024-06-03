@@ -5,13 +5,11 @@ using UnityEngine;
 public class TestProjectile : Projectile
 {
   [Header("Projectile info")]
-  [SerializeField] private int damage;
-
-  private ProjectileStat projectileStat;
+  [SerializeField] private int projectileDamage;
 
   void Start()
   {
-    projectileStat = SetStat(damage);
+    damage = projectileDamage;
   }
 
   public override void Action()

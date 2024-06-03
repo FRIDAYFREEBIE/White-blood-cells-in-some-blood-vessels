@@ -9,11 +9,7 @@ public class TestTower : Tower
 
     void Start()
     {
-        towerStat = SetStat(towerType);
-    }
-
-    public override void Action()
-    {
-        
+        Tower tower = TowerFactory.CreateTower(this, towerType);
+        tower.towerStat.ShowStat();
     }
 }
