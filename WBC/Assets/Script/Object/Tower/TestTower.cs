@@ -7,9 +7,11 @@ public class TestTower : Tower
     [Header("towerType")]
     [SerializeField] private TowerType towerType;
 
+    private Tower tower;
+
     void Start()
     {
-        Tower tower = TowerFactory.CreateTower(this, towerType);
-        tower.towerStat.ShowStat();
+        tower = TowerFactory.CreateTower(this, towerType);
+        tower.GetStat().ShowStat();
     }
 }

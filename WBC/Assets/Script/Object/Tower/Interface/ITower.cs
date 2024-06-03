@@ -2,7 +2,8 @@
 public interface ITower
 {
     TowerStat GetStat();
+    TowerState GetState();
     void Action();
-    void UpdateState();
+    void UpdateState(TowerState towerState);
     TowerStat UpgradeTower(float upgrademultiplier);
 }

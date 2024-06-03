@@ -38,11 +38,23 @@ public enum EnemyState
 
 public class Enemy : MonoBehaviour, IEnemy
 {
-    public EnemyStat enemyStat;
+    private EnemyStat enemyStat;
+    private EnemyState enemyState;
 
     public void Initialize(EnemyStat enemyStat)
     {
         this.enemyStat = enemyStat;
+        enemyState = EnemyState.Stay;
+    }
+
+    public EnemyStat GetStat()
+    {
+        return enemyStat;
+    }
+
+    public EnemyState GetState()
+    {
+        return enemyState;
     }
 
     public void SetTarget()

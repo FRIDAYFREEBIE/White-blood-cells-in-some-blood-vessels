@@ -48,15 +48,13 @@ public enum TowerState
 
 public class Tower : MonoBehaviour, ITower
 {
-    public TowerStat towerStat;
+    private TowerStat towerStat;
+    private TowerState towerState;
 
-    // MonoBehaviour는 생성자를 사용할 수 없으므로 기본 생성자는 제거합니다.
-    // public Tower() { }
-
-    // 대신 Start 또는 Awake에서 towerStat을 설정합니다.
     public void Initialize(TowerStat towerStat)
     {
         this.towerStat = towerStat;
+        towerState = TowerState.Disabled;
     }
 
     public TowerStat GetStat()
@@ -64,14 +62,19 @@ public class Tower : MonoBehaviour, ITower
         return towerStat;
     }
 
+    public TowerState GetState()
+    {
+      return towerState;
+    }
+
     public virtual void Action()
     {
         // 추상 메서드
     }
 
-    public void UpdateState()
+    public void UpdateState(TowerState towerState)
     {
-        // 추후 구현
+        this.towerState = towerState;
     }
 
     public TowerStat UpgradeTower(float upgradeMultiplier)

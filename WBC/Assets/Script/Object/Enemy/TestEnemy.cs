@@ -12,6 +12,11 @@ public class TestEnemy : Enemy
     {
         Enemy enemy = EnemyFactory.CreateEnemy(this, enemyType, level);
 
-        enemy.enemyStat.ShowStat();
+        enemy.GetStat().ShowStat();
+    }
+
+    void Update()
+    {
+      
     }
 }
