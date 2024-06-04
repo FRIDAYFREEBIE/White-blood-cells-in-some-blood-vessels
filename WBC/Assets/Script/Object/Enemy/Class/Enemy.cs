@@ -38,8 +38,8 @@ public enum EnemyState
 
 public class Enemy : MonoBehaviour, IEnemy
 {
-    private EnemyStat enemyStat;
-    private EnemyState enemyState;
+    protected EnemyStat enemyStat;
+    protected EnemyState enemyState;
 
     public void Initialize(EnemyStat enemyStat)
     {
@@ -65,6 +65,13 @@ public class Enemy : MonoBehaviour, IEnemy
     public void PathFind()
     {
         // 경로 탐색 로직
+    }
+
+    public void GetAttack(float damage)
+    {
+        enemyStat.hp -= damage;
+
+        enemyStat.ShowStat();
     }
 
     public virtual void Action()
@@ -93,9 +100,9 @@ public static class EnemyFactory
         switch (enemyType)
         {
             case EnemyType.Normal:
-                return new EnemyStat(level, 10, 1, 1, enemyType);
+                return new EnemyStat(level, 10, 5, 1, enemyType);
             case EnemyType.Boss:
-                return new EnemyStat(level, 50, 1.5f, 5, enemyType);
+                return new EnemyStat(level, 50, 7.5f, 5, enemyType);
             default:
                 return new EnemyStat(); // 기본값으로 초기화
         }

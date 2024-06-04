@@ -14,4 +14,34 @@ public class TestTower : Tower
         tower = TowerFactory.CreateTower(this, towerType);
         tower.GetStat().ShowStat();
     }
+
+    void Update()
+    {
+        Action();
+    }
+
+    public override void Action()
+    {
+        float range = tower.GetStat().range;
+
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range);
+
+        foreach (var hitCollider in hitColliders)
+        {
+            Enemy enemy = hitCollider.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                Debug.Log("Enemy detected: " + enemy.name);
+            }
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (tower != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, tower.GetStat().range);
+        }
+    }
 }

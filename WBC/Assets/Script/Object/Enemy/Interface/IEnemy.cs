@@ -4,6 +4,7 @@ public interface IEnemy
     EnemyState GetState();
     void SetTarget();
     void PathFind();
+    void GetAttack(float damage);
     void Action();
     void UpdateState();
 }

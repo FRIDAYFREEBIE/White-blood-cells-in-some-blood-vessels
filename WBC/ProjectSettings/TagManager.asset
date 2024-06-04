@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Tower
   - Placeable
+  - Enemy
+  - TowerProjectile
+  - EnemyProjectile
+  - Undefined
   layers:
   - Default
   - TransparentFX

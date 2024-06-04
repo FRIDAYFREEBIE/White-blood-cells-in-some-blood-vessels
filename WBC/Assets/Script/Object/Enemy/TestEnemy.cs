@@ -8,15 +8,22 @@ public class TestEnemy : Enemy
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private int level = 1;
 
+    Enemy enemy;
+
     void Start()
     {
-        Enemy enemy = EnemyFactory.CreateEnemy(this, enemyType, level);
+        enemy = EnemyFactory.CreateEnemy(this, enemyType, level);
 
         enemy.GetStat().ShowStat();
     }
 
-    void Update()
+    void OnTriggerEnter2D(Collider2D other)
     {
-      
+        if(other.CompareTag("TowerProjectile"))
+        {
+            Projectile projectile = other.gameObject.GetComponent<Projectile>();
+
+            enemy.GetAttack(projectile.GetDamage());
+        }
     }
 }

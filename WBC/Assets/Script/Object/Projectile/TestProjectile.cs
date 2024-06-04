@@ -11,9 +11,4 @@ public class TestProjectile : Projectile
   {
     damage = projectileDamage;
   }
-
-  public override void Action()
-  {
-
-  }
 }
