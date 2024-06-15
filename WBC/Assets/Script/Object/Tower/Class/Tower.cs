@@ -51,13 +51,12 @@ public enum TowerState
 
 public class Tower : MonoBehaviour, ITower
 {
-    private TowerStat towerStat;
-    private TowerState towerState;
+    protected TowerStat towerStat;
+    protected TowerState towerState;
 
     public void Initialize(TowerStat towerStat)
     {
         this.towerStat = towerStat;
-        towerState = TowerState.Disabled;
     }
 
     public TowerStat GetStat()

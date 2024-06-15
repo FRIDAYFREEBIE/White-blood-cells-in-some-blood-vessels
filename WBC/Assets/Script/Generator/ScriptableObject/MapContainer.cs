@@ -13,38 +13,20 @@ public class MapContainer : ScriptableObject
     
     public GameObject BaseTile
     {
-        get
-        {
-            return baseTile;
-        }
-        set
-        {
-            baseTile = value;
-        }
+        get{return baseTile;}
+        set{baseTile = value;}
     }
 
     public GameObject EmptyTile
     {
-        get
-        {
-            return emptyTile;
-        }
-        set
-        {
-            emptyTile = value;
-        }
+        get{return emptyTile;}
+        set{emptyTile = value;}
     }
 
 
     public int[,] Terrain
     {
-        get
-        {
-            return terrain;
-        }
-        set
-        {
-            terrain = value;
-        }
+        get{return terrain;}
+        set{terrain = value;}
     }
 }

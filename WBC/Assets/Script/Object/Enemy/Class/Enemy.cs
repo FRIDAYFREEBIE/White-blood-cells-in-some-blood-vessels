@@ -1,3 +1,4 @@
+using System.Data.SqlTypes;
 using UnityEngine;
 
 public struct EnemyStat
@@ -6,20 +7,22 @@ public struct EnemyStat
     public float hp;
     public float range;
     public float damage;
+    public int money;
     public EnemyType enemyType;
 
-    public EnemyStat(int level, float hp, float range, float damage, EnemyType enemyType)
+    public EnemyStat(int level, float hp, float range, float damage, int money, EnemyType enemyType)
     {
-        this.hp = hp * level;
+        this.hp = (level*0.5f) * level;
         this.level = level;
         this.range = range;
-        this.damage = damage;
+        this.damage = (level*0.5f) * damage;
+        this.money = money;
         this.enemyType = enemyType;
     }
 
     public void ShowStat()
     {
-        Debug.Log("Enemy Stat\n" + "Hp: " + hp + " Level: " + level + " Range: " + range + " Type: " + enemyType);
+        Debug.Log("Enemy Stat\n" + "Hp: " + hp + " Level: " + level + " Damage: " + damage + " Type: " + enemyType);
     }
 }
 
@@ -31,8 +34,7 @@ public enum EnemyType
 
 public enum EnemyState
 {
-    Move,
-    Stay,
+    Alive,
     Die
 }
 
@@ -44,7 +46,7 @@ public class Enemy : MonoBehaviour, IEnemy
     public void Initialize(EnemyStat enemyStat)
     {
         this.enemyStat = enemyStat;
-        enemyState = EnemyState.Stay;
+        enemyState = EnemyState.Alive;
     }
 
     public EnemyStat GetStat()
@@ -57,16 +59,6 @@ public class Enemy : MonoBehaviour, IEnemy
         return enemyState;
     }
 
-    public void SetTarget()
-    {
-        // 타겟 설정 로직
-    }
-
-    public void PathFind()
-    {
-        // 경로 탐색 로직
-    }
-
     public void GetAttack(float damage)
     {
         enemyStat.hp -= damage;
@@ -77,11 +69,6 @@ public class Enemy : MonoBehaviour, IEnemy
     public virtual void Action()
     {
         // 가상 함수
-    }
-
-    public void UpdateState()
-    {
-        // 상태 업데이트 로직
     }
 }
 
@@ -100,9 +87,9 @@ public static class EnemyFactory
         switch (enemyType)
         {
             case EnemyType.Normal:
-                return new EnemyStat(level, 10, 5, 1, enemyType);
+                return new EnemyStat(level, 10, 5, 1, 50, enemyType);
             case EnemyType.Boss:
-                return new EnemyStat(level, 50, 7.5f, 5, enemyType);
+                return new EnemyStat(level, 50, 7.5f, 5, 300, enemyType);
             default:
                 return new EnemyStat(); // 기본값으로 초기화
         }

@@ -1,13 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class PathFinding : MonoBehaviour
 {
-    public Transform seeker; // 자신의 위치를 나타내는 Transform
+    [Header("moveSpeed")]
+    [SerializeField] private float moveSpeed; // 적의 이동 속도
     private Transform target; // 가장 가까운 타워의 위치를 나타내는 Transform
-    public GridGenerator gridGenerator;
+    private GridGenerator gridGenerator;
+    private List<Node> currentPath = new List<Node>(); // 현재 이동 경로를 저장하는 리스트
 
     void Awake()
     {
@@ -19,11 +20,12 @@ public class PathFinding : MonoBehaviour
         target = FindClosestTarget();
         if (target != null)
         {
-            FindPath(seeker.position, target.position);
+            FindPath(transform.position, target.position);
+            MoveAlongPath(); // 경로 따라 이동하는 메서드 호출
         }
         else
         {
-            Debug.Log("target is NULL");
+            Debug.Log("Target is NULL");
         }
     }
 
@@ -35,7 +37,7 @@ public class PathFinding : MonoBehaviour
 
         foreach (GameObject tower in towers)
         {
-            float distance = Vector3.Distance(seeker.position, tower.transform.position);
+            float distance = Vector3.Distance(transform.position, tower.transform.position);
             if (distance < minDistance)
             {
                 minDistance = distance;
@@ -58,10 +60,13 @@ public class PathFinding : MonoBehaviour
         Node closestNode = null;
         int closestNodeFCost = int.MaxValue;
 
-        while (openSet.Count > 0) {
+        while (openSet.Count > 0)
+        {
             Node node = openSet[0];
-            for (int i = 1; i < openSet.Count; i ++) {
-                if (openSet[i].fCost < node.fCost || openSet[i].fCost == node.fCost) {
+            for (int i = 1; i < openSet.Count; i++)
+            {
+                if (openSet[i].fCost < node.fCost || openSet[i].fCost == node.fCost)
+                {
                     if (openSet[i].hCost < node.hCost)
                         node = openSet[i];
                 }
@@ -70,18 +75,22 @@ public class PathFinding : MonoBehaviour
             openSet.Remove(node);
             closedSet.Add(node);
 
-            if (node == targetNode) {
+            if (node == targetNode)
+            {
                 RetracePath(startNode, targetNode);
                 return;
             }
 
-            foreach (Node neighbour in gridGenerator.GetNeighbours(node)) {
-                if (!neighbour.walkable || closedSet.Contains(neighbour)) {
+            foreach (Node neighbour in gridGenerator.GetNeighbours(node))
+            {
+                if (!neighbour.walkable || closedSet.Contains(neighbour))
+                {
                     continue;
                 }
 
                 int newCostToNeighbour = node.gCost + GetDistance(node, neighbour);
-                if (newCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour)) {
+                if (newCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
+                {
                     neighbour.gCost = newCostToNeighbour;
                     neighbour.hCost = GetDistance(neighbour, targetNode);
                     neighbour.parent = node;
@@ -91,30 +100,32 @@ public class PathFinding : MonoBehaviour
                 }
             }
 
-            if (node.hCost < closestNodeFCost && node.walkable) {
+            if (node.hCost < closestNodeFCost && node.walkable)
+            {
                 closestNodeFCost = node.hCost;
                 closestNode = node;
             }
         }
 
-        if (closestNode != null) {
+        if (closestNode != null)
+        {
             RetracePath(startNode, closestNode);
         }
     }
 
     void RetracePath(Node startNode, Node endNode)
     {
-        List<Node> tracePath = new List<Node>();
+        List<Node> path = new List<Node>();
         Node currentNode = endNode;
 
         while (currentNode != startNode)
         {
-            tracePath.Add(currentNode);
+            path.Add(currentNode);
             currentNode = currentNode.parent;
         }
-        tracePath.Reverse();
+        path.Reverse();
 
-        gridGenerator.path = tracePath;
+        currentPath = path; // 경로를 currentPath에 저장
     }
 
     int GetDistance(Node nodeA, Node nodeB)
@@ -125,5 +136,27 @@ public class PathFinding : MonoBehaviour
         if (dstX > dstY)
             return 14 * dstY + 10 * (dstX - dstY);
         return 14 * dstX + 10 * (dstY - dstX);
+    }
+
+    void MoveAlongPath()
+    {
+        if (currentPath == null || currentPath.Count == 0)
+            return;
+
+        // 현재 위치에서 첫 번째 노드로 이동
+        Node targetNode = currentPath[0];
+        Vector3 targetPosition = gridGenerator.WorldPointFromNode(targetNode); // 월드 포인트로 변환
+
+        // 현재 위치에서 목표 위치까지의 방향 계산
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        
+        transform.position = newPosition;
+
+        // 목표 위치에 도달했으면 해당 노드를 경로에서 제거
+        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        {
+            currentPath.RemoveAt(0);
+        }
     }
 }

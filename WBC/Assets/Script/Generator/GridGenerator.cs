@@ -15,8 +15,6 @@ public class GridGenerator : MonoBehaviour, IGenerator {
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
-
-        Generate();
     }
 
     public void Generate() {
@@ -43,6 +41,15 @@ public class GridGenerator : MonoBehaviour, IGenerator {
         return grid[x, y];
     }
 
+    // Node에서 월드 좌표로 변환하는 메서드
+    public Vector3 WorldPointFromNode(Node node)
+    {
+        // 그리드 노드의 월드 좌표를 계산
+        float worldX = node.gridX * nodeDiameter + nodeRadius - gridWorldSize.x / 2;
+        float worldY = node.gridY * nodeDiameter + nodeRadius - gridWorldSize.y / 2;
+        return new Vector3(worldX, worldY, 0);
+    }
+
     public List<Node> GetNeighbours(Node node) {
         List<Node> neighbours = new List<Node>();
 
@@ -62,20 +69,4 @@ public class GridGenerator : MonoBehaviour, IGenerator {
 
         return neighbours;
     }
-
-    public List<Node> path;
-
-    // void OnDrawGizmos() {
-    //     Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, gridWorldSize.y, 1));
-
-    //     if (grid != null) {
-    //         foreach (Node n in grid) {
-    //             Gizmos.color = (n.walkable) ? Color.white : Color.red;
-    //             if (path != null)
-    //                 if (path.Contains(n))
-    //                     Gizmos.color = Color.black;
-    //             Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
-    //         }
-    //     }
-    // }
 }

@@ -1,27 +1,31 @@
-using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Tower))]
-
-public class UpgradeTower : MonoBehaviour
+[RequireComponent(typeof(BasicTower))]
+public class UpgradeTower : Tower, ITowerStatObserver
 {
-
     [Header("Upgrade Multiplier")]
-    [SerializeField, Range(0,10)] private float upgradeMultiplier;
+    [SerializeField, Range(0, 10)] private float upgradeMultiplier;
 
-    private Tower tower;
-    private TowerStat towerStat;
+    private BasicTower basicTower;
 
     private void Start()
     {
-        tower  = GetComponent<Tower>();
+        basicTower = GetComponent<BasicTower>();
+
+        basicTower.RegisterObserver(this);
     }
 
     public void OnClickUpgradeButton()
     {
-        towerStat = tower.UpgradeTower(upgradeMultiplier);
+        towerStat = basicTower.UpgradeTower(upgradeMultiplier);
 
-        Debug.Log("Tower upgraded! upgradeMultiplier: " + upgradeMultiplier);
+        basicTower.UpdateTowerStat(towerStat);
+    }
+
+    public void OnTowerStatChanged(TowerStat newStat)
+    {
+        towerStat = newStat; 
+
         towerStat.ShowStat();
     }
 }

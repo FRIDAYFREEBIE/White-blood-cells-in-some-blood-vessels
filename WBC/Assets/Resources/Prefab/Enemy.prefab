@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2446959361628207248}
   - component: {fileID: -5071760564265054703}
   - component: {fileID: -8471698088610694861}
+  - component: {fileID: 2918249881476111412}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -99,8 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714b85051ed374249b58b8dcc6f8644b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeker: {fileID: 3120008394270201920}
-  gridGenerator: {fileID: 0}
+  moveSpeed: 8
 --- !u!61 &-5071760564265054703
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -148,3 +148,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &2918249881476111412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8275072793419899289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c549dc9083d895247a5e94977ac0f586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 0

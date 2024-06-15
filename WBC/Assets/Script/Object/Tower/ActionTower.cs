@@ -2,22 +2,24 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(BasicTower))]
-public class ActionTower : Tower
+public class ActionTower : Tower, ITowerStatObserver
 {
     [Header("Projectile")]
     [SerializeField] private Projectile projectilePrefab;  // projectile 프리팹을 참조하도록 변경
 
     private BasicTower basicTower;
-    private Tower tower;
     private float fireCooldown;
     private float fireTimer;
 
     private void Start()
     {
         basicTower = GetComponent<BasicTower>();
-        tower = basicTower.tower;
-        fireCooldown = 1f / tower.GetStat().fireRate;  // 연사력에 따른 쿨다운 설정
-        fireTimer = 0f;
+        towerStat = basicTower.tower.GetStat();
+
+        basicTower.RegisterObserver(this);
+
+        // 초기 스탯을 기반으로 fireCooldown 설정
+        UpdateFireCooldown();
     }
 
     private void Update()
@@ -27,13 +29,13 @@ public class ActionTower : Tower
         if (fireTimer >= fireCooldown)
         {
             Action();
-            fireTimer = 0f;  // 타이머 초기화
+            fireTimer = 0f;
         }
     }
 
     public override void Action()
     {
-        float range = tower.GetStat().range;
+        float range = towerStat.range;
 
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range);
         Enemy closestEnemy = null;
@@ -59,17 +61,31 @@ public class ActionTower : Tower
         if (closestEnemy != null)
         {
             Projectile newProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-            newProjectile.Initialize(tower.GetStat().ability);
+            newProjectile.Initialize(towerStat.ability);
             newProjectile.SetTarget(closestEnemy);
         }
     }
 
     private void OnDrawGizmosSelected()
     {
-        if (tower != null)
+        if (basicTower != null)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, tower.GetStat().range);
+            Gizmos.DrawWireSphere(transform.position, towerStat.range);
         }
+    }
+
+    public void OnTowerStatChanged(TowerStat newStat)
+    {
+        towerStat = newStat;
+
+        UpdateFireCooldown();
+
+        Debug.Log("ActionTower: 타워의 스탯이 변경되었습니다: " + newStat);
+    }
+
+    private void UpdateFireCooldown()
+    {
+        fireCooldown = 1f / towerStat.fireRate;
     }
 }

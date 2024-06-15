@@ -12,7 +12,7 @@ public class TestTower : Tower
     void Start()
     {
         tower = TowerFactory.CreateTower(this, towerType);
-        tower.GetStat().ShowStat();
+        towerStat.ShowStat();
     }
 
     void Update()
@@ -22,7 +22,7 @@ public class TestTower : Tower
 
     public override void Action()
     {
-        float range = tower.GetStat().range;
+        float range = towerStat.range;
 
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range);
 
@@ -41,7 +41,7 @@ public class TestTower : Tower
         if (tower != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, tower.GetStat().range);
+            Gizmos.DrawWireSphere(transform.position, towerStat.range);
         }
     }
 }
