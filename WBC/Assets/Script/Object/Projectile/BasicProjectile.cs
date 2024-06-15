@@ -1,16 +1,22 @@
 using System.Collections;
 using UnityEngine;
 
-
 [RequireComponent(typeof(Collider2D))]
 
 public class BasicProjectile : Projectile
 {
     private void Update()
     {
+        Debug.Log(damage);
+
         if(target != null)
         {
             Action();
+        }
+        
+        if(target.GetState() == EnemyState.Die)
+        {
+            GameObject.Destroy(this);
         }
     }
 

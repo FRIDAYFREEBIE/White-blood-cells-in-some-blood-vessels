@@ -14,7 +14,6 @@ public class ActionTower : Tower, ITowerStatObserver
     private void Start()
     {
         basicTower = GetComponent<BasicTower>();
-        towerStat = basicTower.tower.GetStat();
 
         basicTower.RegisterObserver(this);
 
@@ -80,8 +79,6 @@ public class ActionTower : Tower, ITowerStatObserver
         towerStat = newStat;
 
         UpdateFireCooldown();
-
-        Debug.Log("ActionTower: 타워의 스탯이 변경되었습니다: " + newStat);
     }
 
     private void UpdateFireCooldown()

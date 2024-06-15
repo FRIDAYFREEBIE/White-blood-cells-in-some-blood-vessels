@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6032eaf7c8649f740b6095065910111f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 8275072793419899289, guid: 0b3b015853528a146b2b132598f87d6b, type: 3}
+  towerPrefab: {fileID: 631806733486479477, guid: eddb6de5c214a934bb7dc0a0ee7602e2, type: 3}
   placeablelayer:
     serializedVersion: 2
     m_Bits: 64

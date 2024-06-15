@@ -12,7 +12,7 @@ public struct EnemyStat
 
     public EnemyStat(int level, float hp, float range, float damage, int money, EnemyType enemyType)
     {
-        this.hp = (level*0.5f) * level;
+        this.hp = (level*0.5f) * hp;
         this.level = level;
         this.range = range;
         this.damage = (level*0.5f) * damage;

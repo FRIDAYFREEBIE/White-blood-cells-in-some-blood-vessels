@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour, IProjectile
     {
         this.damage = damage;
     }
-
+    
     public float GetDamage()
     {
         return damage;

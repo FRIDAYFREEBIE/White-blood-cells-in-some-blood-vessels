@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : Spanwer
+public class EnemySpawner : Spawner
 {
     [Header("GameManager")]
     [SerializeField] private GameManager gameManager;
@@ -16,7 +16,7 @@ public class EnemySpawner : Spanwer
     [Header("Current Enemies")]
     [SerializeField] private List<Enemy> currentEnemies = new List<Enemy>();
 
-    public void Start()
+    void Start()
     {
         currentEnemies = new List<Enemy>();
     }
@@ -38,8 +38,6 @@ public class EnemySpawner : Spanwer
         }
     }
 
-
-    // 스폰
     private void SpawnEnemy(Enemy enemyPrefab)
     {
         Vector3 spawnPosition = GetRandomSpawnPosition();
@@ -48,7 +46,6 @@ public class EnemySpawner : Spanwer
         currentEnemies.Add(spawnedEnemy);
     }
 
-    // 랜덤 위치
     private Vector3 GetRandomSpawnPosition()
     {
         int width = mapContainer.Terrain.GetLength(0);
@@ -72,5 +69,24 @@ public class EnemySpawner : Spanwer
 
         int randomIndex = Random.Range(0, validPositions.Count);
         return validPositions[randomIndex];
+    }
+
+    public void RemoveEnemy(Enemy enemy)
+    {
+        if (currentEnemies.Contains(enemy))
+        {
+            currentEnemies.Remove(enemy);
+            Destroy(enemy.gameObject); // 게임 오브젝트 제거
+
+            if (currentEnemies.Count == 0)
+            {
+                OnAllEnemiesRemoved();
+            }
+        }
+    }
+
+    private void OnAllEnemiesRemoved()
+    {
+        gameManager.NextStage();
     }
 }

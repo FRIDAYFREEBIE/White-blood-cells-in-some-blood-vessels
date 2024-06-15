@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
   [SerializeField] private MapGenerator mapGenerator;
   [SerializeField] private GridGenerator gridGenerator;
 
-  private int enemyLevel;
   
   public void Start()
   {
@@ -45,6 +44,10 @@ public class GameManager : MonoBehaviour
   {
     stageInfoContainer.Stage++;
     Debug.Log("Stage: " + stageInfoContainer.Stage);
+
+    ChangeMoney(50*stageInfoContainer.Stage);
+    
+    StartStage();
   }
 
   public int CurrentMoney()

@@ -23,10 +23,6 @@ public class PathFinding : MonoBehaviour
             FindPath(transform.position, target.position);
             MoveAlongPath(); // 경로 따라 이동하는 메서드 호출
         }
-        else
-        {
-            Debug.Log("Target is NULL");
-        }
     }
 
     Transform FindClosestTarget()
