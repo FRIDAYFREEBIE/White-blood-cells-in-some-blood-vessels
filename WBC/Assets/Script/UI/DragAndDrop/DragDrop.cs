@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,16 +8,42 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 {
     public GameObject towerPrefab;  // 사용할 프리팹
     public LayerMask placeablelayer; // 충돌을 감지할 레이어 마스크
+    public GameManager gameManager;
+
+    public TowerType towerType;
 
     private GameObject currentDraggedPrefab;
     private Vector3 offset;
+    private int price;
+
+    void Start()
+    {
+        switch(towerType)
+        {
+            case TowerType.Scout:
+                price = 50;
+                break;
+            case TowerType.Ranger:
+                price = 50;
+                break;
+            case TowerType.Railgun:
+                price = 300;
+                break;
+            default:
+                price = 100;
+                break;
+        }
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, Camera.main.nearClipPlane));
+        if(price <= gameManager.CurrentMoney())
+        {
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, Camera.main.nearClipPlane));
 
-        currentDraggedPrefab = Instantiate(towerPrefab, worldPosition, Quaternion.identity);
-        offset = currentDraggedPrefab.transform.position - worldPosition;
+            currentDraggedPrefab = Instantiate(towerPrefab, worldPosition, Quaternion.identity);
+            offset = currentDraggedPrefab.transform.position - worldPosition;
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -39,6 +66,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                 Destroy(currentDraggedPrefab);
 
             currentDraggedPrefab = null;
+            
+            gameManager.ChangeMoney(-price);
         }
     }
 

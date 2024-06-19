@@ -52,6 +52,11 @@ public class BasicTower : Tower
             observer.OnTowerStatChanged(towerStat);
         }
     }
+    
+    public int GetLevel()
+    {
+        return towerStat.level;
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {

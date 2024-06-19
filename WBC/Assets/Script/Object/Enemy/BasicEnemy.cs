@@ -9,7 +9,7 @@ public class BasicEnemy : Enemy
     [Header("Enemy Configuration")]
     [SerializeField] private EnemyType enemyType;
 
-    private int level;
+    public int level;
 
     private Enemy enemy;
     private GameManager gameManager;
@@ -28,8 +28,6 @@ public class BasicEnemy : Enemy
         enemy = EnemyFactory.CreateEnemy(this, enemyType, level);
 
         enemy.GetStat().ShowStat();
-
-        AdjustScaleBasedOnLevel();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -38,7 +36,8 @@ public class BasicEnemy : Enemy
         {
             Projectile projectile = other.gameObject.GetComponent<Projectile>();
 
-            enemy.GetAttack(projectile.GetDamage());
+            if(projectile != null)
+                enemy.GetAttack(projectile.GetDamage());
 
             GameObject.Destroy(other.gameObject);
 
@@ -56,14 +55,5 @@ public class BasicEnemy : Enemy
         enemySpawner.RemoveEnemy(this);
 
         GameObject.Destroy(this);
-    }
-
-    private void AdjustScaleBasedOnLevel()
-    {
-        float baseScaleMultiplier = 0.5f;
-
-        float scaleFactor = baseScaleMultiplier * level;
-
-        transform.localScale = new Vector3(scaleFactor, scaleFactor, transform.localScale.z);
     }
 }

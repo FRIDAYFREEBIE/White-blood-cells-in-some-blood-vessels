@@ -12,6 +12,12 @@ public class ArrowUI : MonoBehaviour
 
     private int temp = 0;
 
+    void Start()
+    {
+        upArrow.SetActive(false);
+        downArrow.SetActive(true);
+    }
+
     public void OnClick()
     {
         if (temp % 2 == 0)

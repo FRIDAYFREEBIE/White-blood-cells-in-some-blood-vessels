@@ -20,12 +20,14 @@ public class GameManager : MonoBehaviour
   {
     terrainGenerator.Generate();
     mapGenerator.Generate();
+
+    stageInfoContainer.StartGame();
+    
+    ChangeMoney(100);
   }
   public void StartGame()
   {
     gridGenerator.Generate();
-
-    stageInfoContainer.StartGame();
 
     enemySpawner.Spawn();
   }

@@ -982,6 +982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapContainer: {fileID: 11400000, guid: 92ce2ed78ff5e0c4f865e41e0d84ea53, type: 2}
+  gameManager: {fileID: 0}
   baseTilePrefab: {fileID: 2379503453087895502, guid: ddb3145f1e85ab844a59c20f9328560d, type: 3}
   emptyTilePrefab: {fileID: 7551981129092498520, guid: f5fa93898438a2443904f95383cdca3c, type: 3}
   tilesPerFrame: 10
