@@ -6,5 +6,5 @@ public interface ITower
     void Action();
     void GetAttack(float damage);
     void UpdateState(TowerState towerState);
-    TowerStat UpgradeTower(float upgrademultiplier);
+    TowerStat UpgradeTower();
 }

@@ -19,7 +19,7 @@ TagManager:
   - UI
   - Placeable
   - Projectile
-  - 
+  - RailGun
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: RailGun
+    uniqueID: 165147477
     locked: 0

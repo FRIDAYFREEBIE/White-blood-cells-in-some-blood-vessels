@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour, IProjectile
 {
-    protected float damage;
-    protected Enemy target;
+    public float damage;
+    public Enemy target;
 
     public void Initialize(float damage)
     {

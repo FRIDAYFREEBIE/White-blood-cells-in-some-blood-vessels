@@ -33,7 +33,7 @@ public class LevelTextUI : MonoBehaviour
         if(type == TextType.Enemy && basicEnemy != null)
             level = basicEnemy.level;
         else if(type == TextType.Tower && basicTower != null)
-            level = basicTower.GetLevel();
+            level = basicTower.ReturnStat().level;
 
         text.text = level.ToString();
     }

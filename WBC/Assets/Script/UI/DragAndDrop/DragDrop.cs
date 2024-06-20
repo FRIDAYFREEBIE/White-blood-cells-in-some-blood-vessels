@@ -23,14 +23,17 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
             case TowerType.Scout:
                 price = 50;
                 break;
+            case TowerType.Shotgun:
+                price = 100;
+                break;
             case TowerType.Ranger:
-                price = 50;
+                price = 200;
                 break;
             case TowerType.Railgun:
-                price = 300;
+                price = 100000;
                 break;
             default:
-                price = 100;
+                price = 500;
                 break;
         }
     }

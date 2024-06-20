@@ -62,8 +62,6 @@ public class Enemy : MonoBehaviour, IEnemy
     public void GetAttack(float damage)
     {
         enemyStat.hp -= damage;
-
-        enemyStat.ShowStat();
     }
 
     public virtual void Action()
@@ -82,7 +80,7 @@ public static class EnemyFactory
         return enemyObject;
     }
 
-    private static EnemyStat CreateEnemyStat(EnemyType enemyType, int level)
+    public static EnemyStat CreateEnemyStat(EnemyType enemyType, int level)
     {
         switch (enemyType)
         {

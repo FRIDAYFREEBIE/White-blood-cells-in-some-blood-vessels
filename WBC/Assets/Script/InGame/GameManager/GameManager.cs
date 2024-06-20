@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     stageInfoContainer.StartGame();
     
-    ChangeMoney(100);
+    ChangeMoney(100000);
   }
   public void StartGame()
   {
@@ -60,6 +60,5 @@ public class GameManager : MonoBehaviour
   public void ChangeMoney(int amount)
   {
     stageInfoContainer.Money += amount;
-    Debug.Log("Money: " + stageInfoContainer.Money);
   }
 }

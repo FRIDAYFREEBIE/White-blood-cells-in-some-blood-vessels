@@ -9,6 +9,8 @@ public class BasicTower : Tower
 
     [HideInInspector] public Tower tower;
 
+    public TowerStat publicTowerStat;
+
     private List<ITowerStatObserver> observers = new List<ITowerStatObserver>();
 
     private void Start()
@@ -20,6 +22,11 @@ public class BasicTower : Tower
         towerStat.ShowStat();
 
         NotifyObservers();
+    }
+
+    void Update()
+    {
+        publicTowerStat = towerStat;
     }
 
     public void UpdateTowerStat(TowerStat newStat)
@@ -53,9 +60,9 @@ public class BasicTower : Tower
         }
     }
     
-    public int GetLevel()
+    public TowerStat ReturnStat()
     {
-        return towerStat.level;
+        return towerStat;
     }
 
     void OnTriggerEnter2D(Collider2D other)

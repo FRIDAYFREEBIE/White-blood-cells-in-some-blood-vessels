@@ -5,28 +5,22 @@ using UnityEngine;
 
 public class BasicProjectile : Projectile
 {
-    private void Update()
-    {
-        Debug.Log(damage);
+    [Header("Projectile")]    
+    [SerializeField] private Projectile projectile;
 
-        if(target != null)
-        {
-            Action();
-        }
-        
-        if(target.GetState() == EnemyState.Die)
-        {
-            GameObject.Destroy(this);
-        }
+    void Start()
+    {
+        Invoke("Die", 1f);
     }
 
-    public override void Action()
+    private void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, 5f * Time.deltaTime);
+        if(target != null)
+            projectile.Action();
+    }
 
-        if (Vector2.Distance(transform.position, target.transform.position) < 0.1f)
-        {
-            HitTarget();
-        }
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }

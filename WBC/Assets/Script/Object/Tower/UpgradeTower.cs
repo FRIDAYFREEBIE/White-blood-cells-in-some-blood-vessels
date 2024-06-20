@@ -3,11 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(BasicTower))]
 public class UpgradeTower : Tower, ITowerStatObserver
 {
-    [Header("Upgrade Multiplier")]
-    [SerializeField, Range(0, 10)] private float upgradeMultiplier;
-
     private GameManager gameManager;
     private BasicTower basicTower;
+
 
     private void Start()
     {
@@ -24,7 +22,7 @@ public class UpgradeTower : Tower, ITowerStatObserver
 
         if(gameManager.CurrentMoney() >= price)
         {
-            towerStat = basicTower.UpgradeTower(upgradeMultiplier);
+            towerStat = basicTower.UpgradeTower();
 
             towerStat.ShowStat();
 

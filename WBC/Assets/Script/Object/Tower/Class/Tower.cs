@@ -21,9 +21,9 @@ public struct TowerStat
         this.towerType = towerType;
     }
 
-    public TowerStat Upgrade(float upgradeMultiplier)
+    public TowerStat Upgrade()
     {
-        return new TowerStat(hp * upgradeMultiplier, level + 1, range * upgradeMultiplier, ability * upgradeMultiplier, fireRate * upgradeMultiplier, price, towerType);
+        return new TowerStat(hp * 2, level + 1, range * 1.5f, ability * 2, fireRate * 2, price, towerType);
     }
 
     public void ShowStat()
@@ -87,33 +87,33 @@ public class Tower : MonoBehaviour, ITower
         this.towerState = towerState;
     }
 
-    public TowerStat UpgradeTower(float upgradeMultiplier)
+    public TowerStat UpgradeTower()
     {
-        towerStat = towerStat.Upgrade(upgradeMultiplier);
+        towerStat = towerStat.Upgrade();
         return towerStat;
     }
 }
 
 public static class TowerFactory
 {
-    private static TowerStat CreateTowerStat(TowerType towerType)
+    public static TowerStat CreateTowerStat(TowerType towerType)
     {
         switch (towerType)
         {
             case TowerType.Scout:
                 return new TowerStat(10, 1, 5, 1, 1, 50, towerType);  // 연사력 추가
             case TowerType.Shotgun:
-                return new TowerStat(10, 1, 5, 2, 0.5f, 100, towerType);
+                return new TowerStat(10, 1, 5, 1, 0.5f, 100, towerType);
             case TowerType.Ranger:
-                return new TowerStat(10, 1, 10, 1, 0.8f, 200, towerType);
+                return new TowerStat(10, 1, 10, 2, 0.8f, 200, towerType);
             case TowerType.Railgun:
-                return new TowerStat(20, 1, 10, 2, 2, 300, towerType);
+                return new TowerStat(100000, 1, 100, 1000, 0, 100000, towerType);
             case TowerType.Farm:
-                return new TowerStat(10, 1, 0, 1, 0, 100, towerType);
+                return new TowerStat(10, 1, 0, 1, 0, 500, towerType);
             case TowerType.Commander:
-                return new TowerStat(10, 1, 15, 1, 0.2f, 100, towerType);
+                return new TowerStat(10, 1, 15, 1, 0.2f, 500, towerType);
             case TowerType.Freezer:
-                return new TowerStat(10, 1, 15, 2, 0.7f, 100, towerType);
+                return new TowerStat(10, 1, 15, 2, 0.7f, 500, towerType);
             default:
                 return new TowerStat(); // 기본값으로 초기화
         }

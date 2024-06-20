@@ -9,7 +9,7 @@ public class TerrainGenerator : Generator
     [SerializeField] private int height;
 
     [Header("Seed")]
-    [SerializeField] private string seed;
+    [SerializeField] private int seed;
     [SerializeField] private bool useRandomSeed;
 
     [Header("SmoothCoefficient")]
@@ -40,7 +40,7 @@ public class TerrainGenerator : Generator
     {
         // 랜덤 시드 생성
         if(useRandomSeed)
-            seed = Time.time.ToString();
+            seed = Random.Range(0,100);
 
         System.Random rmd = new System.Random(seed.GetHashCode());
 

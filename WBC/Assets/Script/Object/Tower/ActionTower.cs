@@ -4,8 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(BasicTower))]
 public class ActionTower : Tower, ITowerStatObserver
 {
-    [Header("Projectile")]
-    [SerializeField] private Projectile projectilePrefab;  // projectile 프리팹을 참조하도록 변경
+    [Header("Tower")]    
+    [SerializeField] private Tower action;
 
     private BasicTower basicTower;
     private float fireCooldown;
@@ -27,51 +27,15 @@ public class ActionTower : Tower, ITowerStatObserver
 
         if (fireTimer >= fireCooldown)
         {
-            Action();
+            action.Action();
             fireTimer = 0f;
         }
-    }
-
-    public override void Action()
-    {
-        float range = towerStat.range;
-
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range);
-        Enemy closestEnemy = null;
-        float closestDistance = Mathf.Infinity;
-
-        foreach (var hitCollider in hitColliders)
+        else if(towerStat.fireRate == 0)
         {
-            if (hitCollider.gameObject.CompareTag("Enemy"))
-            {
-                Enemy enemy = hitCollider.GetComponent<Enemy>();
-                if (enemy != null)
-                {
-                    float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-                    if (distanceToEnemy < closestDistance)
-                    {
-                        closestDistance = distanceToEnemy;
-                        closestEnemy = enemy;
-                    }
-                }
-            }
+            action.Action();
         }
 
-        if (closestEnemy != null)
-        {
-            Projectile newProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-            newProjectile.Initialize(towerStat.ability);
-            newProjectile.SetTarget(closestEnemy);
-        }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (basicTower != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, towerStat.range);
-        }
+        towerStat = basicTower.publicTowerStat;
     }
 
     public void OnTowerStatChanged(TowerStat newStat)

@@ -27,7 +27,7 @@ public class BasicEnemy : Enemy
 
         enemy = EnemyFactory.CreateEnemy(this, enemyType, level);
 
-        enemy.GetStat().ShowStat();
+        enemy.GetStat();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -50,10 +50,15 @@ public class BasicEnemy : Enemy
     {
         enemyState = EnemyState.Die;
 
-        gameManager.ChangeMoney(enemyStat.money);
+        gameManager.ChangeMoney(enemyStat.money*enemyStat.level);
 
         enemySpawner.RemoveEnemy(this);
 
         GameObject.Destroy(this);
+    }
+
+    public EnemyStat ReturnStat()
+    {
+        return enemyStat;
     }
 }
