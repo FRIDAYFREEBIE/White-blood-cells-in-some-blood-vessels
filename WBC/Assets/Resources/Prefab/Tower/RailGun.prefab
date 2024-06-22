@@ -165,6 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerType: 3
   tower: {fileID: 0}
+  isCommander: 0
 --- !u!114 &1648115959415161186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +273,7 @@ LineRenderer:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
-    numCapVertices: 1
+    numCapVertices: 0
     alignment: 0
     textureMode: 0
     shadowBias: 10

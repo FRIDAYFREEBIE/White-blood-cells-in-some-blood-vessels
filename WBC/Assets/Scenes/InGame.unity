@@ -156,7 +156,7 @@ MonoBehaviour:
   mapContainer: {fileID: 11400000, guid: 92ce2ed78ff5e0c4f865e41e0d84ea53, type: 2}
   enemies:
   - {fileID: 2918249881476111412, guid: 4b8b06d8cf731a942a899416a42819b5, type: 3}
-  - {fileID: 2918249881476111412, guid: 4b8b06d8cf731a942a899416a42819b5, type: 3}
+  - {fileID: 3477892698212606951, guid: 5b369d19f4cdc9044b52e7ed8aebe1ee, type: 3}
   currentEnemies: []
 --- !u!4 &126266067
 Transform:
@@ -992,7 +992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6032eaf7c8649f740b6095065910111f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 3800970778222601882, guid: 3e60a7609bb7c994f9cb0a2a528a9bc8, type: 3}
+  towerPrefab: {fileID: 681638756670344439, guid: 8f55206321353c04b806190bbfbbd8c9, type: 3}
   placeablelayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1439,7 +1439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6032eaf7c8649f740b6095065910111f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 3800970778222601882, guid: 3e60a7609bb7c994f9cb0a2a528a9bc8, type: 3}
+  towerPrefab: {fileID: 2144102801753933676, guid: 71bc30bc789938a459d360b94158c57e, type: 3}
   placeablelayer:
     serializedVersion: 2
     m_Bits: 64
@@ -2897,7 +2897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6032eaf7c8649f740b6095065910111f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 3800970778222601882, guid: 3e60a7609bb7c994f9cb0a2a528a9bc8, type: 3}
+  towerPrefab: {fileID: 1626090704804168943, guid: 9a737129eb111214aa54c1b790064cae, type: 3}
   placeablelayer:
     serializedVersion: 2
     m_Bits: 64

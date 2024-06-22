@@ -23,6 +23,8 @@ public class ActionTower : Tower, ITowerStatObserver
 
     private void Update()
     {
+        towerStat = basicTower.publicTowerStat;
+
         fireTimer += Time.deltaTime;
 
         if (fireTimer >= fireCooldown)
@@ -31,11 +33,7 @@ public class ActionTower : Tower, ITowerStatObserver
             fireTimer = 0f;
         }
         else if(towerStat.fireRate == 0)
-        {
             action.Action();
-        }
-
-        towerStat = basicTower.publicTowerStat;
     }
 
     public void OnTowerStatChanged(TowerStat newStat)

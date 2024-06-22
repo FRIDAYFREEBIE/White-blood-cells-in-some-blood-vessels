@@ -8,6 +8,6 @@ public interface IProjectile
     void Initialize(float damage);
     float GetDamage();
     void Action();
-    void SetTarget(Enemy enemy);
+    void SetTarget(GameObject target);
     void HitTarget();
 }

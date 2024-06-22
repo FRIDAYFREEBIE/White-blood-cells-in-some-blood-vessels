@@ -73,8 +73,6 @@ public class Tower : MonoBehaviour, ITower
     public void GetAttack(float damage)
     {
         towerStat.hp -= damage;
-
-        towerStat.ShowStat();
     }
 
     public virtual void Action()
@@ -109,11 +107,11 @@ public static class TowerFactory
             case TowerType.Railgun:
                 return new TowerStat(100000, 1, 100, 1000, 0, 100000, towerType);
             case TowerType.Farm:
-                return new TowerStat(10, 1, 0, 1, 0, 500, towerType);
+                return new TowerStat(20, 1, 100, 10, 0.1f, 500, towerType);
             case TowerType.Commander:
-                return new TowerStat(10, 1, 15, 1, 0.2f, 500, towerType);
+                return new TowerStat(20, 1, 15, 10, 0, 500, towerType);
             case TowerType.Freezer:
-                return new TowerStat(10, 1, 15, 2, 0.7f, 500, towerType);
+                return new TowerStat(20, 1, 15, 10, 0, 500, towerType);
             default:
                 return new TowerStat(); // 기본값으로 초기화
         }

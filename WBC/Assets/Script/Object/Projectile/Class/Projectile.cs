@@ -4,7 +4,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour, IProjectile
 {
     public float damage;
-    public Enemy target;
+    public GameObject target;
 
     public void Initialize(float damage)
     {
@@ -16,9 +16,9 @@ public class Projectile : MonoBehaviour, IProjectile
         return damage;
     }
 
-    public void SetTarget(Enemy enemy)
+    public void SetTarget(GameObject target)
     {
-        target = enemy;
+        this.target = target;
     }
 
     public virtual void Action()

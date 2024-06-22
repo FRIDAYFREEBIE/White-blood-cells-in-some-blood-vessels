@@ -9,7 +9,9 @@ public class BasicEnemy : Enemy
     [Header("Enemy Configuration")]
     [SerializeField] private EnemyType enemyType;
 
-    public int level;
+    [HideInInspector] public bool isFreezer;
+    [HideInInspector] public int level;
+    [HideInInspector] public EnemyStat publicEnemyStat;
 
     private Enemy enemy;
     private GameManager gameManager;
@@ -27,7 +29,16 @@ public class BasicEnemy : Enemy
 
         enemy = EnemyFactory.CreateEnemy(this, enemyType, level);
 
-        enemy.GetStat();
+        enemyStat = enemy.GetStat();
+
+        publicEnemyStat = enemyStat;
+
+        enemyStat.ShowStat();
+    }
+
+    void Update()
+    {
+        publicEnemyStat = enemyStat;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -39,7 +50,7 @@ public class BasicEnemy : Enemy
             if(projectile != null)
                 enemy.GetAttack(projectile.GetDamage());
 
-            GameObject.Destroy(other.gameObject);
+            Destroy(other.gameObject);
 
             if(enemyStat.hp <= 0)
                 Die();
@@ -55,6 +66,16 @@ public class BasicEnemy : Enemy
         enemySpawner.RemoveEnemy(this);
 
         GameObject.Destroy(this);
+    }
+
+    public void Freezer()
+    {
+        float temp = enemyStat.fireRate;
+
+        if(isFreezer)
+            enemyStat.fireRate = temp * 0.9f;
+        else
+            enemyStat.fireRate = temp;
     }
 
     public EnemyStat ReturnStat()

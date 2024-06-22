@@ -8,8 +8,8 @@ public class BasicTower : Tower
     [SerializeField] private TowerType towerType;
 
     [HideInInspector] public Tower tower;
-
-    public TowerStat publicTowerStat;
+    [HideInInspector] public TowerStat publicTowerStat;
+    [HideInInspector] public bool isCommander;
 
     private List<ITowerStatObserver> observers = new List<ITowerStatObserver>();
 
@@ -19,7 +19,7 @@ public class BasicTower : Tower
 
         towerStat = tower.GetStat();
 
-        towerStat.ShowStat();
+        //towerStat.ShowStat();
 
         NotifyObservers();
     }
@@ -27,13 +27,15 @@ public class BasicTower : Tower
     void Update()
     {
         publicTowerStat = towerStat;
+
+        Commander();
+
+        NotifyObservers();
     }
 
     public void UpdateTowerStat(TowerStat newStat)
     {
         towerStat = newStat;
-
-        NotifyObservers();
     }
 
     public void RegisterObserver(ITowerStatObserver observer)
@@ -65,13 +67,38 @@ public class BasicTower : Tower
         return towerStat;
     }
 
+    public void Commander()
+    {
+        float temp = towerStat.ability;
+
+        if(isCommander)
+            towerStat.ability = temp * 1.1f; 
+        else
+            towerStat.ability = temp;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("EnemyProjectile"))
         {
             Projectile projectile = other.gameObject.GetComponent<Projectile>();
 
-            tower.GetAttack(projectile.GetDamage());
+            if(projectile != null)
+            GetAttack(projectile.GetDamage());
+
+            Destroy(other.gameObject);
+
+            towerStat.ShowStat();
+
+            if(towerStat.hp <= 0)
+                Die();
         }
+    }
+
+    public void Die()
+    {
+        towerState = TowerState.Disabled;
+
+        Destroy(gameObject);
     }
 }

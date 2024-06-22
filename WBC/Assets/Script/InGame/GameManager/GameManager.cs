@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +27,30 @@ public class GameManager : MonoBehaviour
     
     ChangeMoney(100000);
   }
+
+  void Update()
+  {
+    if(stageInfoContainer.Stage != 1)
+    {
+      if(isAllDead())
+      {
+        GameOver();
+      }
+    }
+  }
+
+  void GameOver()
+  {
+    SceneManager.LoadScene("GameOver");
+  }
+
+  bool isAllDead()
+  {
+    GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
+
+    return towers.Length == 0;
+  }
+
   public void StartGame()
   {
     gridGenerator.Generate();

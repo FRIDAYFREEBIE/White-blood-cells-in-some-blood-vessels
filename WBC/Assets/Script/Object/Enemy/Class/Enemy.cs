@@ -8,21 +8,23 @@ public struct EnemyStat
     public float range;
     public float damage;
     public int money;
+    public float fireRate;
     public EnemyType enemyType;
 
-    public EnemyStat(int level, float hp, float range, float damage, int money, EnemyType enemyType)
+    public EnemyStat(int level, float hp, float range, float damage, int money, float fireRate, EnemyType enemyType)
     {
-        this.hp = (level*0.5f) * hp;
         this.level = level;
+        this.hp = (level*0.5f) * hp;
         this.range = range;
         this.damage = (level*0.5f) * damage;
         this.money = money;
+        this.fireRate = fireRate;
         this.enemyType = enemyType;
     }
 
     public void ShowStat()
     {
-        Debug.Log("Enemy Stat\n" + "Hp: " + hp + " Level: " + level + " Damage: " + damage + " Type: " + enemyType);
+        Debug.Log("Enemy Stat\n" + "Level: " + level + " HP: " + hp + " Range: " + range + " Damage: " + damage + "FireRate:" + fireRate);
     }
 }
 
@@ -46,6 +48,7 @@ public class Enemy : MonoBehaviour, IEnemy
     public void Initialize(EnemyStat enemyStat)
     {
         this.enemyStat = enemyStat;
+        
         enemyState = EnemyState.Alive;
     }
 
@@ -85,9 +88,9 @@ public static class EnemyFactory
         switch (enemyType)
         {
             case EnemyType.Normal:
-                return new EnemyStat(level, 10, 5, 1, 50, enemyType);
+                return new EnemyStat(level, 10, 10, 1, 50, 1, enemyType);
             case EnemyType.Boss:
-                return new EnemyStat(level, 50, 7.5f, 5, 300, enemyType);
+                return new EnemyStat(level, 50, 15, 5, 300, 1, enemyType);
             default:
                 return new EnemyStat(); // 기본값으로 초기화
         }

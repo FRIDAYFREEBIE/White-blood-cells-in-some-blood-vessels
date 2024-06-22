@@ -26,7 +26,7 @@ public class ScoutTower : Tower, ITowerStatObserver
         float range = towerStat.range;
 
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range);
-        Enemy closestEnemy = null;
+        GameObject closestEnemy = null;
         float closestDistance = Mathf.Infinity;
 
         foreach (var hitCollider in hitColliders)
@@ -40,7 +40,7 @@ public class ScoutTower : Tower, ITowerStatObserver
                     if (distanceToEnemy < closestDistance)
                     {
                         closestDistance = distanceToEnemy;
-                        closestEnemy = enemy;
+                        closestEnemy = enemy.gameObject;
                     }
                 }
             }

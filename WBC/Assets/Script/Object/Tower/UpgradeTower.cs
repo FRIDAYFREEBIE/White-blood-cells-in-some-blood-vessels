@@ -33,7 +33,5 @@ public class UpgradeTower : Tower, ITowerStatObserver
     public void OnTowerStatChanged(TowerStat newStat)
     {
         towerStat = newStat; 
-
-        towerStat.ShowStat();
     }
 }
