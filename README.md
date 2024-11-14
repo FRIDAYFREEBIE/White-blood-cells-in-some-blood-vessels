@@ -28,7 +28,7 @@
 
 ---
 
-## 📄 프로젝트 발표 자료
-[구글 드라이브로 이동](https://drive.google.com/file/d/1BVJMNl9b_EALrI1KjviKOuDzYAB5BWKi/view?usp=drive_link)
+## 📄 프로젝트 자료
+[구글 드라이브로 이동](https://drive.google.com/drive/folders/1T5mu8pkvYJu2mhIrfiyf9focdZtEgnFD?usp=drive_link)
 
 ---
