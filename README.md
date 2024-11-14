@@ -27,3 +27,8 @@
 - 설계와 구현 과정에서 **알고리즘과 디자인 패턴의 중요성**을 체감했습니다.
 
 ---
+
+## 📄 프로젝트 발표 자료
+[Download the Presentation](https://drive.google.com/uc?id=1BVJMNl9b_EALrI1KjviKOuDzYAB5BWKi&export=download)
+
+---
