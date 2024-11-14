@@ -29,6 +29,6 @@
 ---
 
 ## 📄 프로젝트 발표 자료
-[Download the Presentation](https://drive.google.com/uc?id=1BVJMNl9b_EALrI1KjviKOuDzYAB5BWKi&export=download)
+[구글 드라이브로 이동](https://drive.google.com/file/d/1BVJMNl9b_EALrI1KjviKOuDzYAB5BWKi/view?usp=drive_link)
 
 ---
