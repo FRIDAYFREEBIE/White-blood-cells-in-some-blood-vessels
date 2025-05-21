@@ -29,6 +29,5 @@
 ---
 
 ## 📄 프로젝트 자료
-[구글 드라이브로 이동](https://drive.google.com/drive/u/1/folders/1wfMrJEdlmW1ml1LGGuPyW2Nc4TxxMshf)
-
+[구글 드라이브로 이동](https://drive.google.com/drive/u/1/folders/1T5mu8pkvYJu2mhIrfiyf9focdZtEgnFD)
 ---
